@@ -44,7 +44,7 @@ export default function Sidebar() {
   return (
     <div
       className={clsx(
-        "relative h-screen text-white flex flex-col justify-between overflow-hidden transition-all duration-300 ease-in-out",
+        "relative h-screen text-white flex flex-col justify-between overflow-hidden transition-all duration-300 ease-in-out select-none",
         collapsed ? "w-20" : "w-64"
       )}
     >

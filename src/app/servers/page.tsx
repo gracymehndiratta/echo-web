@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaHashtag, FaCog } from "react-icons/fa";
 
 const ServersPage: React.FC = () => {
@@ -81,12 +81,27 @@ const ServersPage: React.FC = () => {
   return (
     <div className="flex h-screen">
       {/* Server Icons Sidebar */}
-      <div className="w-16 bg-black p-2 flex flex-col items-center overflow-hidden">
-        <img
-          src="/Frame_3724.png"
-          alt="Server Icons"
-          className="object-cover h-full w-full rounded-md"
-        />
+      <div
+        className="w-16 p-2 flex flex-col items-center overflow-hidden bg-cover bg-center"
+        style={{ backgroundImage: "url('/gradient-background.png')" }}
+      >
+        {[
+          "/hackbattle.png",
+          "/image_6.png",
+          "/image_7.png",
+          "/image_9.png",
+          "/image_6.png",
+          "/hackbattle.png",
+        ].map((src, idx, arr) => (
+          <img
+            key={idx}
+            src={src}
+            alt={`Server ${idx + 1}`}
+            className={`w-12 h-12 rounded-full hover:scale-105 transition-transform cursor-pointer ${
+              idx < arr.length - 1 ? "mb-8" : ""
+            }`}
+          />
+        ))}
       </div>
 
       {/* Channels Sidebar */}

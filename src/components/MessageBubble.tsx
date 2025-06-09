@@ -1,64 +1,40 @@
-// src/components/MessageBubble.tsx
-import Image from "next/image";
-import clsx from "clsx";
+import React from "react";
 
-export default function MessageBubble({
-  name,
-  isSender,
-  message,
-  avatarUrl,
-}: {
+interface Props {
   name?: string;
   isSender?: boolean;
   message: string;
   avatarUrl?: string;
-}) {
+  timestamp: string;
+}
+
+const MessageBubble: React.FC<Props> = ({
+  name,
+  isSender = false,
+  message,
+  avatarUrl,
+  timestamp,
+}) => {
   return (
-    <div
-      className={clsx(
-        "flex gap-3 items-start",
-        isSender ? "justify-end text-right" : "justify-start text-left"
-      )}
-    >
-      {!isSender && (
-        <div className="w-10 h-10 rounded-full bg-gray-700 overflow-hidden">
-          {avatarUrl ? (
-            <Image
-              src={avatarUrl}
-              alt={`${name} avatar`}
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-          ) : null}
-        </div>
-      )}
-
-      <div>
-        {name && <p className="text-sm text-gray-400 mb-1">{name}</p>}
+    <div className={`flex ${isSender ? "justify-end" : "justify-start"} mb-2`}>
+      <div
+        className={`flex flex-col items-${
+          isSender ? "end" : "start"
+        } max-w-[75%]`}
+      >
         <div
-          className={clsx(
-            "px-4 py-2 rounded-lg max-w-md inline-block",
-            isSender ? "bg-gray-700 text-white" : "bg-blue-700 text-white"
-          )}
+          className={`px-4 py-2 rounded-xl ${
+            isSender
+              ? "bg-[#1e1f22] text-white rounded-br-none"
+              : "bg-[#2b2d31] text-white rounded-bl-none"
+          }`}
         >
-          {message}
+          <p className="text-sm">{message}</p>
         </div>
+        <span className="text-[10px] text-gray-400 mt-1">{timestamp}</span>
       </div>
-
-      {isSender && (
-        <div className="w-10 h-10 rounded-full bg-gray-700 overflow-hidden">
-          {avatarUrl ? (
-            <Image
-              src={avatarUrl}
-              alt={`${name} avatar`}
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-          ) : null}
-        </div>
-      )}
     </div>
   );
-}
+};
+
+export default MessageBubble;
